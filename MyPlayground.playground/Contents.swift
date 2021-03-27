@@ -5,7 +5,7 @@
 //  Created by Erik Storås Sommer on 23/03/2021.
 //
 
-let tall = [4,3,4,3]
+let tall = [4,3,4,3,5,7,1,9]
 
 loop()
 
@@ -57,3 +57,24 @@ func loop() -> Void {
         print(i)
     }
 }
+
+print("-----------Algo-----------")
+
+func binarysearch(list: [Int], key: Int, left: Int, right: Int) -> Int {
+    if left <= right {
+        let split = (left + right) / 2;
+        if list[split] > key {
+            return binarysearch(list: list, key: key, left: left, right: split-1);
+        }else if list[split] < key {
+            return binarysearch(list: list, key: key, left: split+1, right: right);
+        }else{
+            return split;
+        }
+    }else{
+        return -1;
+    }
+}
+
+let solve = binarysearch(list: tall, key: 7, left: 0, right: tall.count-1)
+
+print(solve);
