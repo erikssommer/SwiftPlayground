@@ -125,7 +125,6 @@ extension Array where Element: Comparable {
                 
                 while secondaryindex > -1 {
                     if key < output[secondaryindex] {
-                        
                         //move to correct position
                         output.remove(at: secondaryindex + 1)
                         output.insert(key, at: secondaryindex)
@@ -134,9 +133,42 @@ extension Array where Element: Comparable {
                     secondaryindex -= 1
                 }
             }
-            
             return output
-        }
+    }
+    
+    func selectionSort() -> Array<Element> {
+            
+            //check for trivial case
+            guard self.count > 1 else {
+                return self
+            }
+            
+            //mutated copy
+            var output: Array<Element> = self
+                    
+            for primaryindex in 0..<output.count {
+                            
+                var minimum = primaryindex
+                var secondaryindex = primaryindex + 1
+                            
+                while secondaryindex < output.count {
+             
+                    //store lowest value as minimum
+                    if output[minimum] > output[secondaryindex] {
+                        minimum = secondaryindex
+                    }
+                    secondaryindex += 1
+                }
+                
+                
+                //swap minimum value with array iteration
+                if primaryindex != minimum {
+                    output.swapAt(primaryindex, minimum)
+                }
+            }
+                    
+            return output
+    }
 }
 let numberList : Array<Int> = [8, 2, 10, 9, 7, 5]
 print("List before sorting: \(numberList)")
@@ -146,3 +178,6 @@ print("Bubble sort: \(resultsBubleSort)")
 //execute sort
 let resultsInsertionSort: Array<Int> = numberList.insertionSort()
 print("Insertion sort: \(resultsInsertionSort)")
+//execute sort
+let resultsSelectionSort: Array<Int> = numberList.selectionSort()
+print("Selection sort: \(resultsSelectionSort)")
