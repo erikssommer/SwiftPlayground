@@ -78,3 +78,37 @@ func binarysearch(list: [Int], key: Int, left: Int, right: Int) -> Int {
 let solve = binarysearch(list: tall, key: 7, left: 0, right: tall.count-1)
 
 print(solve);
+
+// Bubblesort
+extension Array where Element: Comparable {
+
+    func bubbleSort() -> Array<Element> {
+                
+        //check for trivial case
+        guard self.count > 1 else {
+            return self
+        }
+                
+        //mutated copy
+        var output: Array<Element> = self
+        
+        for primaryIndex in 0..<self.count {
+            let passes = (output.count - 1) - primaryIndex
+                        
+            //"half-open" range operatorı
+            for secondaryIndex in 0..<passes {
+                let key = output[secondaryIndex]
+                
+                //compare / swap positions
+                if (key > output[secondaryIndex + 1]) {
+                  output.swapAt(secondaryIndex, secondaryIndex + 1)
+                }
+            }
+        }
+                
+        return output
+    }
+}
+let numberList : Array<Int> = [8, 2, 10, 9, 7, 5]
+//execute sort
+let results: Array<Int> = numberList.bubbleSort()
