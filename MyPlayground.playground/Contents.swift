@@ -79,7 +79,6 @@ let solve = binarysearch(list: tall, key: 7, left: 0, right: tall.count-1)
 
 print(solve);
 
-// Bubblesort
 extension Array where Element: Comparable {
 
     func bubbleSort() -> Array<Element> {
@@ -108,7 +107,42 @@ extension Array where Element: Comparable {
                 
         return output
     }
+    
+    func insertionSort() -> Array<Element> {
+            
+            //check for trivial case
+            guard self.count > 1 else {
+                return self
+            }
+            
+            //mutated copy
+            var output: Array<Element> = self
+            
+            for primaryindex in 0..<output.count {
+                
+                let key = output[primaryindex]
+                var secondaryindex = primaryindex
+                
+                while secondaryindex > -1 {
+                    if key < output[secondaryindex] {
+                        
+                        //move to correct position
+                        output.remove(at: secondaryindex + 1)
+                        output.insert(key, at: secondaryindex)
+                    }
+                    
+                    secondaryindex -= 1
+                }
+            }
+            
+            return output
+        }
 }
 let numberList : Array<Int> = [8, 2, 10, 9, 7, 5]
+print("List before sorting: \(numberList)")
 //execute sort
-let results: Array<Int> = numberList.bubbleSort()
+let resultsBubleSort: Array<Int> = numberList.bubbleSort()
+print("Bubble sort: \(resultsBubleSort)")
+//execute sort
+let resultsInsertionSort: Array<Int> = numberList.insertionSort()
+print("Insertion sort: \(resultsInsertionSort)")
